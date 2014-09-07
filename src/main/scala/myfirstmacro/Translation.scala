@@ -39,11 +39,10 @@ object Translation {
     println(s"Translating $input ...")
 
     // 翻訳APIを呼び出す
-    val encodedInput = URLEncoder.encode(input, "UTF-8")
-    val responseBytes = uri"http://glosbe.com/gapi/translate?from=ja&dest=eng&format=json&pretty=true&tm=false&phrase=$encodedInput"
-      .slurp[Byte]
-    val jsonString = new String(responseBytes, "UTF-8")
-    val json = Json.parse(jsonString)
+    implicit val encoding = Encodings.`UTF-8`
+    val response = uri"http://glosbe.com/gapi/translate?from=ja&dest=eng&format=json&pretty=true&tm=false&phrase=${input.urlEncode}"
+      .slurp[Char]
+    val json = Json.parse(response)
 
     // 最初の翻訳結果を抽出して使う
     val firstResult = json.tuc(0).phrase.text.as[String]
