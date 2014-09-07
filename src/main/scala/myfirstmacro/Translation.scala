@@ -30,7 +30,7 @@ object Translation {
     // 渡された文字列を抽出
     val input: String = text match {
       case Literal(Constant(string)) => string.asInstanceOf[String]
-      case _ => c.error(c.enclosingPosition, "Sorry, you can only use this macro with literal Strings"); ""
+      case _ => c.abort(c.enclosingPosition, "Sorry, you can only use this macro with literal Strings")
     }
     println(s"Translating $input ...")
 
