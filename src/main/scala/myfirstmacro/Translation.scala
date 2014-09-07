@@ -1,10 +1,6 @@
 package myfirstmacro
 
 // マクロ機能を明示的に有効にする
-
-import java.net.URLEncoder
-
-
 import scala.language.experimental.macros
 
 // ブラックボックスとホワイトボックスという２種類のマクロがある。
