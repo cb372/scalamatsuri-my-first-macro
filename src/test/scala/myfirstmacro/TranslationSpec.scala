@@ -8,11 +8,14 @@ import org.scalatest.{Matchers, FlatSpec}
  */
 class TranslationSpec extends FlatSpec with Matchers {
 
-  behavior of "Translated text"
+  behavior of "Translation"
 
-  it should "be in English" in {
+  it should "translate a Japanese string into English" in {
     val translated = Translation.toEnglish("こんにちは")
-
     translated should be("hello")
+  }
+
+  it should "fail to compile if it cannot find an translation" in {
+    """Translation.toEnglish("ぶーびーばーぶーぴー")""" shouldNot compile
   }
 }
